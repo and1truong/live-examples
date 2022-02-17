@@ -3,7 +3,7 @@ package task
 import (
 	"context"
 	"fmt"
-	
+
 	"github.com/jfyne/live"
 )
 
@@ -12,13 +12,13 @@ type (
 		Tasks []task
 		Form  form
 	}
-	
+
 	task struct {
 		ID       string
 		Name     string
 		Complete bool
 	}
-	
+
 	form struct {
 		Errors map[string]string
 	}

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
-	
+
 	"github.com/jfyne/live"
 	"github.com/jfyne/live/page"
 	g "github.com/maragudk/gomponents"
@@ -38,35 +38,35 @@ func pageRegister(c *page.Component) error {
 	c.HandleEvent(validateTZ, func(_ context.Context, p live.Params) (interface{}, error) {
 		// Get the current page component state.
 		state, _ := c.State.(*PageState)
-		
+
 		// Get the tz coming from the form.
 		tz := p.String("tz")
-		
+
 		// Try to make a new ClockState, this will return an error if the
 		// timezone is not real.
 		if _, err := NewClockState(tz); err != nil {
 			state.ValidationError = fmt.Sprintf("Timezone %s does not exist", tz)
 			return state, nil
 		}
-		
+
 		// If there was no error loading the clock state reset the
 		// validation error.
 		state.ValidationError = ""
-		
+
 		return state, nil
 	})
-	
+
 	// Handler for adding a timezone.
 	c.HandleEvent(addTime, func(_ context.Context, p live.Params) (interface{}, error) {
 		// Get the current page component state.
 		state, _ := c.State.(*PageState)
-		
+
 		// Get the timezone sent from the form input.
 		tz := p.String("tz")
 		if tz == "" {
 			return state, nil
 		}
-		
+
 		// Use the page.Init function to create a new clock, register it and mount it.
 		clock, err := page.Init(context.Background(), func() (*page.Component, error) {
 			// Each clock requires its own unique stable ID. Events for each clock can then find
@@ -76,14 +76,14 @@ func pageRegister(c *page.Component) error {
 		if err != nil {
 			return state, err
 		}
-		
+
 		// Update the page state with the new clock.
 		state.Clocks = append(state.Clocks, clock)
-		
+
 		// Return the state to have it persisted.
 		return state, nil
 	})
-	
+
 	return nil
 }
 
@@ -93,7 +93,7 @@ func pageRender(w io.Writer, cmp *page.Component) error {
 	if !ok {
 		return fmt.Errorf("could not get state")
 	}
-	
+
 	// Here we use the gomponents library to do typed rendering.
 	// https://github.com/maragudk/gomponents
 	return c.HTML5(c.HTML5Props{

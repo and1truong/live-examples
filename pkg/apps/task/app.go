@@ -3,7 +3,7 @@ package task
 import (
 	"html/template"
 	"log"
-	
+
 	"github.com/jfyne/live"
 )
 
@@ -16,7 +16,7 @@ func newState(s live.Socket) *state {
 			},
 		}
 	}
-	
+
 	m.Form.Errors = map[string]string{}
 	return m
 }
@@ -27,7 +27,7 @@ func NewHandler() *live.BaseHandler {
 	handler.HandleEvent("validate", onValidate)
 	handler.HandleEvent("save", onSave)
 	handler.HandleEvent("complete", onComplete)
-	
+
 	return handler
 }
 
@@ -36,6 +36,6 @@ func withRender() live.HandlerConfig {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	return live.WithTemplateRenderer(t)
 }

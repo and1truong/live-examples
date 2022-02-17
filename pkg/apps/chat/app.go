@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	
+
 	"github.com/jfyne/live"
 )
 
@@ -16,7 +16,7 @@ func NewEngine(ctx context.Context, store live.HttpSessionStore) http.Handler {
 	handler.HandleEvent("send", onSend)
 	handler.HandleSelf("insert", onInsert)
 	engine := live.NewHttpHandler(store, handler)
-	
+
 	return engine
 }
 
@@ -25,6 +25,6 @@ func withRender() live.HandlerConfig {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	return live.WithTemplateRenderer(t)
 }

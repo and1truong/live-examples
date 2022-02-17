@@ -4,7 +4,7 @@ import (
 	"context"
 	"html/template"
 	"log"
-	
+
 	"github.com/jfyne/live"
 )
 
@@ -13,7 +13,7 @@ func NewHandler() *live.BaseHandler {
 	h.HandleMount(onMount)
 	h.HandleEvent("inc", onIncrease)
 	h.HandleEvent("dec", onDecrease)
-	
+
 	return h
 }
 
@@ -22,13 +22,13 @@ func withRender() live.HandlerConfig {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	return live.WithTemplateRenderer(t)
 }
 
 func onMount(ctx context.Context, s live.Socket) (interface{}, error) {
 	c := newAppState(s)
 	c.Value = 1000
-	
+
 	return c, nil
 }

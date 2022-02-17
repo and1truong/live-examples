@@ -3,7 +3,7 @@ package chart
 import (
 	"context"
 	"math/rand"
-	
+
 	"github.com/jfyne/live"
 )
 
@@ -13,13 +13,13 @@ type state struct {
 
 func newState(s live.Socket) *state {
 	d, ok := s.Assigns().(*state)
-	
+
 	if !ok {
 		return &state{
 			Sales: rand.Perm(9),
 		}
 	}
-	
+
 	return d
 }
 

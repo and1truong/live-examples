@@ -2,7 +2,7 @@ package counter
 
 import (
 	"context"
-	
+
 	"github.com/jfyne/live"
 )
 

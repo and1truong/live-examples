@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	
+
 	"github.com/jfyne/live"
 )
 
@@ -18,8 +18,8 @@ func main() {
 			"Msg":  "Ping",
 		},
 	}
-	
+
 	data, _ := json.Marshal(live.TransportMessage{Topic: "my-app", Msg: msg})
-	
+
 	fmt.Println("encoded: ", string(data))
 }
