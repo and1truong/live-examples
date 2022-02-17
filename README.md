@@ -2,7 +2,7 @@ Just reuse examples from [jfyne/live-examples](https://github.com/jfyne/live-exa
 ====
 
 ```
-go run cmd/main.go
+make run
 ```
 
 ## Examples
@@ -21,5 +21,5 @@ go run cmd/main.go
 ## Fiber Handler
 
 ```
-MODE=fiber go run cmd/main.go
+make fiber
 ```
