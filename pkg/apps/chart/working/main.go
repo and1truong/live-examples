@@ -44,7 +44,7 @@ func main() {
 }
 
 func getApp() *live.BaseHandler {
-	t, err := template.ParseFiles("root.html", "pkg/app/chart/view.html")
+	t, err := template.ParseFiles("root.html", "pkg/apps/chart/view.html")
 	if err != nil {
 		log.Fatal(err)
 	}

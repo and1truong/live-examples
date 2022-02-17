@@ -18,7 +18,7 @@ func NewHandler() *live.BaseHandler {
 }
 
 func withRender() live.HandlerConfig {
-	t, err := template.ParseFiles("root.html", "pkg/app/counter/view.html")
+	t, err := template.ParseFiles("root.html", "pkg/apps/counter/view.html")
 	if err != nil {
 		log.Fatal(err)
 	}

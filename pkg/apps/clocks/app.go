@@ -5,7 +5,7 @@ import (
 	
 	"github.com/jfyne/live"
 	"github.com/jfyne/live/page"
-	"learn/pkg/app/clocks/components"
+	"learn/pkg/apps/clocks/components"
 )
 
 func NewHandler() *live.BaseHandler {

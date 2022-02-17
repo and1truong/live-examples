@@ -112,7 +112,7 @@ func pageRender(w io.Writer, cmp *page.Component) error {
 				g.Attr("live-submit", cmp.Event(addTime)),
 				h.Div(
 					h.P(g.Text("Try Europe/London or America/New_York")),
-					h.Input(h.Name("tz")),
+					h.Input(h.Name("tz"), h.Value("Australia/Brisbane")),
 					g.If(state.ValidationError != "", h.Span(g.Text(state.ValidationError))),
 				),
 				h.Input(h.Type("submit"), g.If(state.ValidationError != "", h.Disabled())),

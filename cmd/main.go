@@ -6,10 +6,10 @@ import (
 	
 	"github.com/jfyne/live"
 	"learn/pkg"
-	"learn/pkg/app/chart"
-	"learn/pkg/app/chat"
-	"learn/pkg/app/clocks"
-	"learn/pkg/app/counter"
+	"learn/pkg/apps/chart"
+	"learn/pkg/apps/chat"
+	"learn/pkg/apps/clocks"
+	"learn/pkg/apps/counter"
 )
 
 func cookieStore() live.HttpSessionStore {
