@@ -14,3 +14,4 @@ go run cmd/main.go
 5. Cluster:
     1. http://localhost:8181/chat/one
     2. http://localhost:8181/chat/two
+6. http://localhost:8181/tasks

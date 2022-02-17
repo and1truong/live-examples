@@ -10,6 +10,7 @@ import (
 	"learn/pkg/apps/chat"
 	"learn/pkg/apps/clocks"
 	"learn/pkg/apps/counter"
+	"learn/pkg/apps/task"
 )
 
 func cookieStore() live.HttpSessionStore {
@@ -26,6 +27,8 @@ func main() {
 	builder.AddEngine("/charts", chart.NewEngine(ctx, store))
 	builder.AddEngine("/chat", chat.NewEngine(ctx, store))
 	builder.AddCluster("chat-app", chat.NewCluster(ctx, store))
+	builder.AddHandler("/tasks", task.NewHandler())
+	
 	if err := builder.Run(ctx, store, ":8181"); nil != err {
 		fmt.Println("server error: ", err.Error())
 	}
