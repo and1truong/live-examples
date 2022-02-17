@@ -22,7 +22,7 @@ func NewEngine(ctx context.Context, store live.HttpSessionStore) http.Handler {
 }
 
 func tick(ctx context.Context, engine *live.HttpEngine) {
-	ticker := time.NewTicker(4 * time.Second)
+	ticker := time.NewTicker(333 * time.Millisecond)
 	
 	for {
 		select {

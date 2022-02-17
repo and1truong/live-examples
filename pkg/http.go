@@ -17,6 +17,25 @@ func NewLiveBuilder() *builder {
 type builder struct {
 	handlers map[string]live.Handler
 	engines  map[string]http.Handler
+	clusters []*Cluster
+}
+
+type Cluster struct {
+	PubSub *live.PubSub
+	Nodes  []Node
+}
+
+type Node struct {
+	Pattern string
+	Engine  http.Handler
+}
+
+func (this *builder) AddCluster(name string, cluster *Cluster) {
+	for i := range cluster.Nodes {
+		cluster.PubSub.Subscribe(name, cluster.Nodes[i].Engine.(*live.HttpEngine))
+	}
+	
+	this.clusters = append(this.clusters, cluster)
 }
 
 func (this *builder) AddHandler(path string, handler live.Handler) {
@@ -34,6 +53,13 @@ func (this *builder) Run(ctx context.Context, store live.HttpSessionStore, addre
 	
 	for pattern, engine := range this.engines {
 		http.Handle(pattern, engine)
+	}
+	
+	for i := range this.clusters {
+		for ii := range this.clusters[i].Nodes {
+			node := this.clusters[i].Nodes[ii]
+			http.Handle(node.Pattern, node.Engine)
+		}
 	}
 	
 	http.Handle("/live.js", live.Javascript{})

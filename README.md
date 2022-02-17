@@ -5,9 +5,12 @@ Just reuse examples from jfyne/live-examples
 go run cmd/main.go
 ```
 
-### Examples
+## Examples
 
-- http://localhost:8181/counter
-- http://localhost:8181/clocks
-- http://localhost:8181/charts
-- http://localhost:8181/chat
+1. http://localhost:8181/counter
+2. http://localhost:8181/clocks
+3. http://localhost:8181/charts
+4. http://localhost:8181/chat
+5. Cluster:
+    1. http://localhost:8181/chat/one
+    2. http://localhost:8181/chat/two

@@ -19,12 +19,13 @@ func cookieStore() live.HttpSessionStore {
 func main() {
 	ctx := context.Background()
 	store := cookieStore()
+	
 	builder := pkg.NewLiveBuilder()
 	builder.AddHandler("/counter", counter.NewHandler())
 	builder.AddHandler("/clocks", clocks.NewHandler())
 	builder.AddEngine("/charts", chart.NewEngine(ctx, store))
 	builder.AddEngine("/chat", chat.NewEngine(ctx, store))
-	
+	builder.AddCluster("chat-app", chat.NewCluster(ctx, store))
 	if err := builder.Run(ctx, store, ":8181"); nil != err {
 		fmt.Println("server error: ", err.Error())
 	}
