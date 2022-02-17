@@ -1,4 +1,4 @@
-Just reuse examples from jfyne/live-examples
+Just reuse examples from [jfyne/live-examples](https://github.com/jfyne/live-examples)
 ====
 
 ```
