@@ -2,10 +2,10 @@ package clocks
 
 import (
 	"context"
-
+	
 	"github.com/jfyne/live"
 	"github.com/jfyne/live/page"
-	"learn/pkg/apps/clocks/components"
+	"learn/pkg/apps/clocks/components/screen"
 )
 
 func NewHandler() *live.BaseHandler {
@@ -16,5 +16,5 @@ func NewHandler() *live.BaseHandler {
 }
 
 func onMount(ctx context.Context, handler live.Handler, s live.Socket) (*page.Component, error) {
-	return components.NewPage("app", handler, s, "Clocks")
+	return screen.New("app", handler, s, "Clocks")
 }

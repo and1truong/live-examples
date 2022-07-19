@@ -1,11 +1,11 @@
-package components
+package clock
 
 import (
 	"context"
 	"fmt"
 	"io"
 	"time"
-
+	
 	"github.com/jfyne/live"
 	"github.com/jfyne/live/page"
 )
@@ -56,12 +56,12 @@ func clockRegister(c *page.Component) error {
 			return nil, fmt.Errorf("no clock data")
 		}
 		clock.Update(d.(time.Time))
-
+		
 		go func(sock live.Socket) {
 			time.Sleep(1 * time.Second)
 			c.Self(ctx, sock, tick, time.Now())
 		}(c.Socket)
-
+		
 		return clock, nil
 	})
 	return nil
