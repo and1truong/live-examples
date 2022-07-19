@@ -17,7 +17,7 @@ make run
     2. http://localhost:8181/chat/two
 7. http://localhost:8181/tasks - Form
 8. http://localhost:8181/pagination - query params handler, socket.PatchURL().
-9. http://localhost:8181/upload - File uploading
+9. http://localhost:8181/uploads - File uploading
 
 ## Fiber Handler
 
