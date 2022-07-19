@@ -6,7 +6,7 @@ import (
 	"html/template"
 	"log"
 	"net/url"
-
+	
 	"github.com/jfyne/live"
 )
 
@@ -15,26 +15,26 @@ const (
 	nextPage     = "next-page"
 )
 
-func withRender() live.HandlerConfig {
+func NewHandler() *live.BaseHandler {
+	handler := live.NewHandler(withRenderConfig())
+	handler.HandleMount(onMount)
+	handler.HandleParams(paramHandler)
+	handler.HandleEvent(nextPage, onNextPage)
+	
+	return handler
+}
+
+func withRenderConfig() live.HandlerConfig {
 	t, err := template.ParseFiles("root.html", "pkg/apps/pagination/view.html")
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	
 	return live.WithTemplateRenderer(t)
 }
 
 func onMount(ctx context.Context, s live.Socket) (interface{}, error) {
 	return newState(s), nil
-}
-
-func NewHandler() *live.BaseHandler {
-	handler := live.NewHandler(withRender())
-	handler.HandleMount(onMount)
-	handler.HandleParams(paramHandler)
-	handler.HandleEvent(nextPage, onNextPage)
-
-	return handler
 }
 
 // This gets called after mount and contains the URL query string values in the params map.
@@ -51,6 +51,6 @@ func onNextPage(ctx context.Context, socket live.Socket, params live.Params) (in
 	values := url.Values{}
 	values.Add("page", fmt.Sprintf("%d", page))
 	socket.PatchURL(values)
-
+	
 	return socket.Assigns(), nil
 }

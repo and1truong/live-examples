@@ -1,9 +1,9 @@
-package task
+package tasks
 
 import (
 	"context"
 	"fmt"
-
+	
 	"github.com/jfyne/live"
 )
 
@@ -12,17 +12,31 @@ type (
 		Tasks []task
 		Form  form
 	}
-
+	
 	task struct {
 		ID       string
 		Name     string
 		Complete bool
 	}
-
+	
 	form struct {
 		Errors map[string]string
 	}
 )
+
+func newState(s live.Socket) *state {
+	m, ok := s.Assigns().(*state)
+	if !ok {
+		return &state{
+			Form: form{
+				Errors: map[string]string{},
+			},
+		}
+	}
+	
+	m.Form.Errors = map[string]string{}
+	return m
+}
 
 func onMount(ctx context.Context, socket live.Socket) (interface{}, error) {
 	return newState(socket), nil
@@ -56,16 +70,16 @@ func onSave(ctx context.Context, s live.Socket, p live.Params) (interface{}, err
 	return m, nil
 }
 
-func onComplete(ctx context.Context, s live.Socket, p live.Params) (interface{}, error) {
-	m := newState(s)
+func onComplete(ctx context.Context, socket live.Socket, p live.Params) (interface{}, error) {
+	state := newState(socket)
 	ID := p.String("id")
-	for idx, t := range m.Tasks {
+	for idx, t := range state.Tasks {
 		if t.ID != ID {
 			continue
 		}
-		m.Tasks[idx].Complete = !m.Tasks[idx].Complete
+		state.Tasks[idx].Complete = !state.Tasks[idx].Complete
 	}
-	return m, nil
+	return state, nil
 }
 
 func validateMessage(msg string) string {

@@ -1,4 +1,4 @@
-package clock
+package tasks
 
 import (
 	"html/template"
@@ -10,13 +10,15 @@ import (
 func NewHandler() *live.BaseHandler {
 	handler := live.NewHandler(withRenderConfig())
 	handler.HandleMount(onMount)
-	handler.HandleSelf(tick, onTick)
+	handler.HandleEvent("validate", onValidate)
+	handler.HandleEvent("save", onSave)
+	handler.HandleEvent("complete", onComplete)
 	
 	return handler
 }
 
 func withRenderConfig() live.HandlerConfig {
-	t, err := template.ParseFiles("root.html", "pkg/apps/clock/view.html")
+	t, err := template.ParseFiles("root.html", "pkg/apps/tasks/view.html")
 	if err != nil {
 		log.Fatal(err)
 	}
